@@ -1,0 +1,8 @@
+
+COVID19Py==0.3.0
+
+requests==2.23.0
+
+TelegramBotPy==11.2.0
+
+bs4==11.2.0
