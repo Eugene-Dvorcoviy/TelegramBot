@@ -167,6 +167,27 @@ def button_help_handler(update: Update, context: CallbackContext):
         #reply_markup=ReplyKeyboardRemove(),
     )
 
+
+def start(update: Update, context: CallbackContext):
+           reply_markup = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text=button_help),
+                KeyboardButton(text=button_date),
+                KeyboardButton(text=button_currency),
+            ],
+            [
+                KeyboardButton(text=button_covid),
+            ],
+        ],
+        resize_keyboard=True,
+    )
+
+    update.message.reply_text(
+        text=replics[random.randrange(5)],
+        reply_markup=reply_markup,
+    )
+           
 def message_handler(update: Update, context: CallbackContext):
     text = update.message.text
     if text == button_help:
@@ -201,6 +222,8 @@ def message_handler(update: Update, context: CallbackContext):
         return covid_handler(update=update, context=context, tool=text)
     if text[0] == "?":
         return covid_handler(update=update, context=context, tool=text)
+    if text.lower() == "назад":
+        return start(update=update, context=context)             
 
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
