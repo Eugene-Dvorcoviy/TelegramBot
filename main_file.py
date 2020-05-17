@@ -167,26 +167,6 @@ def button_help_handler(update: Update, context: CallbackContext):
         #reply_markup=ReplyKeyboardRemove(),
     )
 
-
-def start(update: Update, context: CallbackContext):
-           reply_markup = ReplyKeyboardMarkup(
-        keyboard=[
-            [
-                KeyboardButton(text=button_help),
-                KeyboardButton(text=button_date),
-                KeyboardButton(text=button_currency),
-            ],
-            [
-                KeyboardButton(text=button_covid),
-            ],
-        ],
-        resize_keyboard=True,
-    )
-
-    update.message.reply_text(
-        text=replics[random.randrange(5)],
-        reply_markup=reply_markup,
-    )
            
 def message_handler(update: Update, context: CallbackContext):
     text = update.message.text
@@ -222,9 +202,7 @@ def message_handler(update: Update, context: CallbackContext):
         return covid_handler(update=update, context=context, tool=text)
     if text[0] == "?":
         return covid_handler(update=update, context=context, tool=text)
-    if text.lower() == "назад":
-        return start(update=update, context=context)             
-
+    
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
@@ -238,9 +216,9 @@ def message_handler(update: Update, context: CallbackContext):
         ],
         resize_keyboard=True,
     )
-
+    value = replics[random.randrange(9)] + "\nЕсли нужно омочь, пиши Помощь"
     update.message.reply_text(
-        text=replics[random.randrange(5)],
+        text=value,
         reply_markup=reply_markup,
     )
 
